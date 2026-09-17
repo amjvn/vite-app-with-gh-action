@@ -1,4 +1,4 @@
-name: Hosted CI/CD Pipeline
+name: Netlify Deployment
 
 on:
   push:
