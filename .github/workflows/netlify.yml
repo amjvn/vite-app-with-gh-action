@@ -1,0 +1,49 @@
+name: Hosted CI/CD Pipeline
+
+on:
+  push:
+    branches: [netlify]
+  pull_request:
+    branches: [netlify]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Fetch the repository files
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+
+      # Step 2: Set up the environment (Adjust Node version as needed)
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: "npm"
+
+      # Step 3: Install dependencies and run tests/linting
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm test --if-present
+
+      # Step 4: Build the application assets locally in the runner
+      - name: Build Project
+        run: npm run build
+
+      # Step 5: Deploy to Netlify
+      # This conditionally adds the --prod flag ONLY if pushing to the main branch
+      - name: Deploy to Netlify
+        run: |
+          if [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref }}" = "refs/heads/netlify" ]; then
+            echo "Deploying to Production..."
+            npx netlify deploy --dir=dist --site=${{ secrets.NETLIFY_SITE_ID }} --auth=${{ secrets.NETLIFY_AUTH_TOKEN }} --prod
+          else
+            echo "Deploying Preview..."
+            npx netlify deploy --dir=dist --site=${{ secrets.NETLIFY_SITE_ID }} --auth=${{ secrets.NETLIFY_AUTH_TOKEN }}
+          fi
