@@ -1,5 +1,6 @@
 {
 	"name": "vite-app-with-gh-action",
+    "main": "./dist",
 	"env": {
 		"staging": {
 			// environment-specific configuration goes here
