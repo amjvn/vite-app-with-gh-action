@@ -18,7 +18,7 @@ function App() {
         <div>
           <h1>Get started</h1>
           <p>
-            This <code>Cloudflare</code> version!
+            This <code>JIJI</code> version!
           </p>
         </div>
         <button
