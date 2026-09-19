@@ -20,6 +20,8 @@ jobs:
         run: npm run lint
       - name: Run Tests
         run: npm test --if-present
+      - name: Run Build
+        run: npm run build
       - name: Deploy to Staging
         if: github.ref != 'refs/heads/main'
         uses: cloudflare/wrangler-action@v4
