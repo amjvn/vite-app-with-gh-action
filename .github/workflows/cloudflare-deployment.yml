@@ -1,3 +1,5 @@
+name: Cloudflare Deployment
+
 on:
   pull_request:
     branches: [cloudflare]
@@ -13,7 +15,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
       - run: npm ci
       - name: Lint
@@ -25,4 +27,3 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./dist --project-name=vite-app-with-gh-action
