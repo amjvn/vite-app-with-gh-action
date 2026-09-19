@@ -1,0 +1,11 @@
+{
+	"name": "vite-app-with-gh-action",
+	"env": {
+		"staging": {
+			// environment-specific configuration goes here
+		},
+		"production": {
+			// environment-specific configuration goes here
+		}
+	}
+}
