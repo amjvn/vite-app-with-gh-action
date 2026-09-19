@@ -1,7 +1,0 @@
-{
-    "name": "vite-app-with-gh-action",
-    "compatibility_date": "2026-09-18",
-    "assets": {
-      "directory": "./dist"
-    }
-}
