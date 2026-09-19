@@ -1,8 +1,6 @@
 name: Cloudflare Deployment
 
-on:
-  pull_request:
-    branches: [cloudflare]
+on: [push]
 
 jobs:
   deploy:
